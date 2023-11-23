@@ -11,7 +11,7 @@ import java.io.Serial;
 @Data
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
-    @Serial // Serial-> Para que no de error en el IDE (opcional)
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String nombreDelRecurso;

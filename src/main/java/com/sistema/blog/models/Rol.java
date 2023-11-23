@@ -51,7 +51,6 @@ public class Rol {
     }
     
 
-    // crear getter y setter
 
     public Long getId() {
         return id;

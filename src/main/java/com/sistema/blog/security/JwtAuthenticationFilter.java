@@ -56,8 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String bearerToken = request.getHeader("Authorization");
 
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-            // cortamos el token, que es por ejemplo BEARER 21sdnsadinasd
-            // ese BEARER mas un espacio en blanco es lo que queremos cortar, es decir 7 caracteres
+
             return bearerToken.substring(7,bearerToken.length());
         }
         return null;

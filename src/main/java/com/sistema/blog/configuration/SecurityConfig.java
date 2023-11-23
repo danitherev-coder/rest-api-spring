@@ -58,16 +58,16 @@ public class SecurityConfig {
             .sessionManagement((session)-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
-                    .requestMatchers(HttpMethod.GET, "/api/**").permitAll() // Permitir peticiones GET a /api/** para cualquiera
-                    .requestMatchers(HttpMethod.POST,"/api/v1/auth/**").permitAll() // Permitir peticiones POST a /api/** para cualquiera)                            
-                    .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN") // Permitir peticiones POST a /api/** para el rol ADMIN
-                    .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN") // Permitir peticiones PUT a /api/** para el rol ADMIN
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN") // Permitir peticiones DELETE a /api/** para el rol ADMIN            
+                    .requestMatchers(HttpMethod.GET, "/api/**").permitAll() 
+                    .requestMatchers(HttpMethod.POST,"/api/v1/auth/**").permitAll() 
+                    .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN") 
+                    .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN") 
+                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN") 
                     .anyRequest().authenticated() // Cualquier otra petición requiere autenticación
                     
                 )
-            .formLogin(loginConfigurer -> loginConfigurer.permitAll()) // Permitir el formulario de inicio de sesión para cualquiera (por defecto /login))                    
-            .userDetailsService(userDetailsService); // Configurar el servicio de detalles de usuario
+            .formLogin(loginConfigurer -> loginConfigurer.permitAll())
+            .userDetailsService(userDetailsService); 
         
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
             
@@ -76,8 +76,7 @@ public class SecurityConfig {
 
     // Configurar autenticación
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
-        //return authenticationManager(authConfiguration);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {        
         return authConfiguration.getAuthenticationManager();
     }
 

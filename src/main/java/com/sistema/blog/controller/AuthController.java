@@ -51,16 +51,14 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<JwtAuthResponseDto> authenticateUser(@RequestBody LoginDto loginDto) {
 
-    // MANEJAR CON TRY CATCH
     try {
       Authentication authentication = authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
-      // Esto sirve para guardar la autenticación en el contexto de seguridad de
-      // Spring
+
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
-      // obtenemos el token de tokenProvider
+      
       String token = tokenProvider.generarToken(authentication);
 
       return ResponseEntity.ok(new JwtAuthResponseDto(token));
@@ -91,8 +89,7 @@ public class AuthController {
     usuario.setPassword(passwordEncoder.encode(registroDto.getPassword()));
 
     Rol rol = rolRepository.findByNombre("ADMIN").get();
-
-    // Actualizar la relación del usuario con el Rol
+    
     usuario.setRoles(Collections.singleton(rol));
 
     usuarioRepository.save(usuario);

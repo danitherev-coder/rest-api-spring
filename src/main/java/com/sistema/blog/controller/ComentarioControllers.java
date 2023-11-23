@@ -38,8 +38,9 @@ public class ComentarioControllers {
             return new ResponseEntity<>(comentarioDto, HttpStatus.OK);
         } catch (BlogAppExceptions e) {
             String mensaje = e.getMensaje();
-            // hago este Map para que el mensaje de error se vea como un json
+            
             Map<String, String> errorResponse = Collections.singletonMap("mensaje", mensaje);
+            
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
     }

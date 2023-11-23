@@ -19,7 +19,7 @@ public class PublicacionesControllers {
     @Autowired
     private PublicacionService publicacionService;
 
-    @PreAuthorize( "hasRole('ADMIN')") // El usuario admin puede crear publicaciones
+    @PreAuthorize( "hasRole('ADMIN')")
     @PostMapping(value = "/crear")
     public ResponseEntity<PublicacionDto> guardarPublicacion(@Valid @RequestBody PublicacionDto publicacionDto) {
         return new ResponseEntity<>(publicacionService.crearPublicacion(publicacionDto), HttpStatus.CREATED) ;
@@ -42,7 +42,7 @@ public class PublicacionesControllers {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')") // El usuario admin puede actualizar publicaciones
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<PublicacionDto> actualizarPublicacion(@Valid @RequestBody PublicacionDto publicacionDto,
                                                                  @PathVariable("id") Long id) {
@@ -50,7 +50,7 @@ public class PublicacionesControllers {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')") // El usuario admin puede eliminar publicaciones
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarPublicacion(@PathVariable("id") Long id, Authentication authentication) {
         publicacionService.eliminarPublicacion(id);

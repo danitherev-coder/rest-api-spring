@@ -46,7 +46,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    // metodo para validar los campos de la entidad Publicaciones
+
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errores,HttpStatus.BAD_REQUEST);
     }
 
-    // Manejar el error de que YA EXISTE UNA PUBLICACION CON EL MISMO TITULO CUANDO SE CREAR LA PUBLICACION
+
 
     @ExceptionHandler(DuplicateTitleException.class)
     public ResponseEntity<ErrorDetalles> handleDuplicateTitleException(DuplicateTitleException exception,
@@ -73,8 +73,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    // Manejar el error de que YA EXISTE UNA PUBLICACION CON EL MISMO TITULO AL ACTUALIZAR UNA PUBLICACION
-    // CUANDO SE CREA YA ESTA ARRIBA
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorDetalles> handleDataIntegrityViolationException(DataIntegrityViolationException exception,
                                                                                WebRequest webRequest) {

@@ -25,17 +25,15 @@ import io.jsonwebtoken.Jwts.SIG;
 
 @Component
 public class JwtTokenProvider {
-    // aca vamos a generar el token,vamos a poner los metodos para generar el token, obtener el token.
 
-    // llave secreta para generar el token
     @Value("${app.jwt-secret}")
     private String jwtSecret = "defaultSecretasdasiug872b3uiybvsu78y2b3iuybasqwdqwd2dwuh2'h293`hd293db32dhn2iudbi/@7ñ/2dbp29udb`'29biubfwebfuywebfuywebvoufywveyf@@ññ!!!D@an13lqwd´wqd";    
 
-    // tiempo de expiracion del token
+    
     @Value("${app.jwt-expiration-in-ms}")
     private int jwtExpirationInMs;
 
-    // Aca lo que hacemos es que Keys.hmacShaKeyFor nos devuelve una llave secreta, y le pasamos el jwtSecret que es la llave secreta que tenemos en el application.properties
+    
     private final SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
     
     
@@ -57,24 +55,24 @@ public class JwtTokenProvider {
         
             return token;
         } catch (Exception e) {
-            // Maneja la excepción de construcción de token aquí
-            e.printStackTrace(); // O registra la excepción en el sistema de registro
+            
+            e.printStackTrace();
             throw new BlogAppExceptions(HttpStatus.INTERNAL_SERVER_ERROR, "Error al generar el token");
         }
     }
 
 
-    // Vamos a obtener el username del token
+    
     public String obtenerUsernameDelToken(String token){
 
-        // Claims son los datos que estan dentro del token
+        
         Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
 
         return claims.getSubject();        
     }
 
 
-    // Aca vamos a validar el token
+    
     public boolean validarToken(String token){
         try {
             Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token);

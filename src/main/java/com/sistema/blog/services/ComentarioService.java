@@ -8,9 +8,7 @@ import java.util.List;
 @Service
 public interface ComentarioService {
 
-    /*
-        Como el comentario necesita de una publicacion, se debe pasar el id de la publicacion
-     */
+ 
     ComentarioDto crearComentario(Long publicacionId, ComentarioDto comentarioDto);
 
     List<ComentarioDto> obtenerComentariosPorPublicacionId(Long publicacionId);
